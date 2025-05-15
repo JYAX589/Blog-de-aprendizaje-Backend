@@ -3,7 +3,10 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import { dbConnection } from "./mongo.js";
-import limiter from "express-rate-limit";
+
+import postRoutes from "../src/posts/post.routes.js";
+import commentRoutes from "../src/comments/comments.routes.js";
+
 
 const middlewares = (app) => {
     app.use(cors());
@@ -11,11 +14,11 @@ const middlewares = (app) => {
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
     app.use(morgan("dev"));
-    app.use(limiter)
 }
 
 const routes = (app) => {
-
+    app.use("/blog/v1/posts", postRoutes);
+    app.use("/blog/v1/comments", commentRoutes);
 }
 
 
@@ -25,7 +28,6 @@ const conectarDB = async () => {
         console.log("Conexión a la base de datos exitosa");
     }catch(error){
         console.error('Error conectando a la base de datos', error);
-        process.exit(1);
     }
 }
 
