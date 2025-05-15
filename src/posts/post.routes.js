@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createPost, updatePost, deletePost, getPostsByCourse} from './post.controller.js';
+import { createPost, updatePost, deletePost, getPostsByCourse, getPostsById} from './post.controller.js';
 
 const router = Router()
 
@@ -19,8 +19,14 @@ router.delete(
 );
 
 router.get(
-    '/course/:courseId',
+    '/course/:course',
     getPostsByCourse
 )
+
+router.get(
+    '/:id',
+    getPostsById
+)
+
 
 export default router;

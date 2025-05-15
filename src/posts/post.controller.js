@@ -32,12 +32,12 @@ export const createPost = async (req, res) => {
 export const updatePost = async (req, res) => {
     try {
         const post = await Post.findByIdAndUpdate(
-        req.params.id,
-        req.body,
-        {
-            new: true,
-            runValidators: true
-        }
+            req.params.id,
+            req.body,
+            {
+                new: true,
+                runValidators: true
+            }
         )
         if (!post) {
             return res.status(404).json({
@@ -103,6 +103,33 @@ export const getPostsByCourse = async (req, res) => {
         res.status(500).json(
             {
                 message: 'Error fetching posts by course',
+                error: error.message
+            }
+        )
+    }
+}
+
+export const getPostsById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const post = await Post.findById(id);
+
+
+        if (!post) {
+            return res.status(404).json({
+                message: 'Post not found'
+            });
+        }
+
+        res.status(200).json({
+            message: 'Post fetched successfully',
+            post
+        })
+    } catch (error) {
+        res.status(500).json(
+            {
+                message: 'Error fetching post by id',
                 error: error.message
             }
         )
