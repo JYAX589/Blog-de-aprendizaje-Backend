@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createPost, updatePost, deletePost, getPostsByCourse, getPostsById} from './post.controller.js';
+import { createPost, updatePost, deletePost, getPostsByCourse, getPostsById, getPosts} from './post.controller.js';
 
 const router = Router()
 
@@ -26,6 +26,11 @@ router.get(
 router.get(
     '/:id',
     getPostsById
+)
+
+router.get(
+    '/',
+    getPosts
 )
 
 

@@ -135,3 +135,20 @@ export const getPostsById = async (req, res) => {
         )
     }
 }
+
+export const getPosts = async (req, res) => {
+    try {
+        const posts = await Post.find();
+        res.status(200).json({
+            message: 'Posts fetched successfully',
+            posts
+        })
+    } catch (error) {
+        res.status(500).json(
+            {
+                message: 'Error fetching posts',
+                error: error.message
+            }
+        )
+    }
+}
