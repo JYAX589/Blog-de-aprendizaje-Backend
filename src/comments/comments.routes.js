@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createComment, getCommentsById, updateCommentsById, deleteCommentsById } from './comments.controller.js';
+import { createComment, getCommentsById, updateCommentsById, deleteCommentsById, getCommentsByPostId } from './comments.controller.js';
 
 const router = Router();
 
@@ -21,5 +21,10 @@ router.put(
 router.delete(
     '/delete/:id',
     deleteCommentsById
+)
+
+router.get(
+    '/post/:postId',
+    getCommentsByPostId
 )
 export default router;

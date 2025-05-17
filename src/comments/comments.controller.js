@@ -103,3 +103,19 @@ export const deleteCommentsById = async (req, res) => {
         });
     }
 };
+
+export const getCommentsByPostId = async (req, res) => {
+    try {
+        const { postId } = req.params;
+        const comments = await Comment.find({ postId });
+        res.status(200).json({
+            message: 'Comments fetched successfully',
+            comments
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error fetching comments by post id',
+            error: error.message
+        });
+    }
+};
